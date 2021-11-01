@@ -47,6 +47,9 @@ class Board
 
     def populate()
 
+        update(Pawn.new([5,0],"W"))
+        update(Pawn.new([5,1],"B"))
+
         8.times do |col|
             update(Pawn.new([6,col],"W"))
         end
@@ -77,6 +80,10 @@ class Board
         @board[thing.current_pos[0]][thing.current_pos[1]]=thing
         @display_board[thing.current_pos[0]][thing.current_pos[1]]=thing.symbol
     end
+    def delete(pos)
+        @board[pos[0]][pos[1]]=nil
+        @display_board[pos[0]][pos[1]]="_"
+    end
 
     def update_pieces_moves()
         @board.each do |row|
@@ -89,18 +96,18 @@ class Board
     end
 
     def winCheck()
-        return true
+        return false
     end
     def verify_input(pos)
         if pos[0]>=0 && pos[1]>=0 && pos[0]<8 && pos[1]<8
             return true
         end
+        p "invalid input"
         return false
     end
 
     def ask_input()
         loop do
-            puts "Please choose a piece from #{@activePlayer.team} Team"
             pos=gets.chomp
             begin
                 pos=JSON.parse(pos)
@@ -112,24 +119,42 @@ class Board
         end
     end
     def select()
+        puts "Please choose a piece from #{@activePlayer.team} Team"
         loop do
             pos=ask_input()
             row= pos[0]
             col= pos[1]
             if @board[row][col]!= nil
                 if@board[row][col].team==@activePlayer.team
-                    return @board[row][col]
+                    thing=@board[row][col]
+                    thing.update_valid_moves(@board)
+                    if thing.valid_moves-thing.invalid_moves!=[]
+                        return @board[row][col]
+                    else
+                        puts "this unit has no valid moves"
+                    end
                 end
             end
         end
     end
 
-    def select_move()
-
+    def select_move(unit)
+        moves=unit.valid_moves-unit.invalid_moves
+        puts "choose from #{moves}"
+        loop do
+            pos=ask_input()
+            moves.each do |move|
+                if pos==move
+                    return pos
+                end
+            end
+        end
     end
 
     def move(unit,pos)
-
+        delete(unit.current_pos)
+        unit.update_pos(pos)
+        update(unit)
     end
 
     def switch_player()
@@ -139,8 +164,7 @@ class Board
     def play()
         loop do
             piece=select()
-            p piece
-            new_pos=select_move()
+            new_pos=select_move(piece)
             move(piece,new_pos)
             display()
             if winCheck==true

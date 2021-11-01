@@ -5,6 +5,9 @@ game=Board.new
 #game.display()
 #game.populate()
 #game.display()
+#ar=[  [7,1],[7,2],[7,3],[7,4]]
+#ar2=[[7,2]]
+#p ar-ar2
 game.play()
 #game.display_pieces()
 #game.update_pieces_moves()
@@ -15,4 +18,4 @@ game.play()
 #    break if time==3
 #    p time
 
-#end
+#end[]

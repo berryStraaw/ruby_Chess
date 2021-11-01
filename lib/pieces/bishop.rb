@@ -91,4 +91,7 @@ class Bishop < Piece
     def get_piece(pos,board_state)
         return board_state[pos[0]][pos[1]]
     end
+    def update_pos(pos)
+        @current_pos=pos
+    end
 end

@@ -84,4 +84,8 @@ class Pawn < Piece
         return board_state[pos[0]][pos[1]]
     end
 
+    def update_pos(pos)
+        @current_pos=pos
+    end
+
 end
