@@ -16,6 +16,7 @@ class Bishop < Piece
 
     def update_valid_moves(board_state)
         @valid_moves=[]
+        @invalid_moves=[]
         row=@current_pos[0]
         col=@current_pos[1]
 
@@ -26,10 +27,11 @@ class Bishop < Piece
             if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
                 if get_piece([tlRow,tlCol],board_state)==nil
                     @valid_moves<<[tlRow,tlCol]
-                elsif get_piece([tlRow,tlCol],board_state).team!=@team
-                    @valid_moves<<[tlRow,tlCol]
-                    break
                 else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
                     break
                 end
             end
@@ -41,10 +43,11 @@ class Bishop < Piece
             if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
                 if get_piece([tlRow,tlCol],board_state)==nil
                     @valid_moves<<[tlRow,tlCol]
-                elsif get_piece([tlRow,tlCol],board_state).team!=@team
-                    @valid_moves<<[tlRow,tlCol]
-                    break
                 else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
                     break
                 end
             end
@@ -57,10 +60,11 @@ class Bishop < Piece
             if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
                 if get_piece([tlRow,tlCol],board_state)==nil
                     @valid_moves<<[tlRow,tlCol]
-                elsif get_piece([tlRow,tlCol],board_state).team!=@team
-                    @valid_moves<<[tlRow,tlCol]
-                    break
                 else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
                     break
                 end
             end
@@ -73,10 +77,11 @@ class Bishop < Piece
             if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
                 if get_piece([tlRow,tlCol],board_state)==nil
                     @valid_moves<<[tlRow,tlCol]
-                elsif get_piece([tlRow,tlCol],board_state).team!=@team
-                    @valid_moves<<[tlRow,tlCol]
-                    break
                 else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
                     break
                 end
             end

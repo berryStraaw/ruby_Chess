@@ -5,4 +5,5 @@ class Piece
     attr_accessor :current_pos
     attr_accessor :name
     attr_accessor :symbol
+    attr_accessor :invalid_moves
 end

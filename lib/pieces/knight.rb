@@ -25,8 +25,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #2
@@ -35,8 +38,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #3
@@ -45,8 +51,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #4
@@ -55,8 +64,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #5
@@ -65,8 +77,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #6
@@ -75,8 +90,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #7
@@ -85,8 +103,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
         #8
@@ -95,8 +116,11 @@ class Knight < Piece
         if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
             if get_piece([nRow,nCol],board_state)==nil
                 @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
+            else
                 @valid_moves<<[nRow,nCol]
+                if get_piece([nRow,nCol],board_state).team==@team
+                    @invalid_moves<<[nRow,nCol]
+                end
             end
         end
     end

@@ -7,30 +7,110 @@ class King < Piece
         @current_pos=pos
         @team=team
         if @team=="W"
-            @other_team="B"
             @symbol="\u265A" #U+265F
         else
-            @other_team="W"
             @symbol="\u2654"
         end
         @valid_moves=[]
     end
 
     def update_valid_moves(board_state)
-        if @first_move
-            @valid_moves<<[@current_pos[0],@current_pos[1]+2]
-            @first_move=false
-        end
-        @valid_moves<<[@current_pos[0],@current_pos[1]+2]
-        
-        if board_state[@current_pos[0]+2,@current_pos[1]+1]!="_"
-            piece=board_state[@current_pos[0]+2,@current_pos[1]+1]
-            if piece.team==@other_team
-                @valid_moves<<[@current_pos[0]+2,@current_pos[1]+1]
+        @valid_moves=[]
+        row=@current_pos[0]
+        col=@current_pos[1]
+
+        #1 row
+        3.times do |time|
+            nRow=row-1
+            nCol=col-1+time
+            valid=true
+            board_state.each do |row|
+                row.each do |piece|
+                    if piece !=nil && piece.team!=@team
+                        piece.valid_moves.each do |move|
+                            #p "#{move} , our pos : #{[nRow,nCol]}"
+                            if move==[nRow,nCol]
+                                valid=false
+                            end
+                        end
+                    elsif piece !=nil && piece.team==@team
+                        valid=false
+                    end
+                end
+            end
+            if valid==true
+                @valid_moves<<[nRow,nCol]
             end
         end
-        if board_state[@current_pos[0]+2,@current_pos[1]+1]!="_" && board_state[@current_pos[0]+2,@current_pos[1]-1].team == @other_team
-            @valid_moves<<[@current_pos[0]+2,@current_pos[1]-1]
+        #2 bot row
+        3.times do |time|
+            nRow=row+1
+            nCol=col-1+time
+            valid=true
+            board_state.each do |row|
+                row.each do |piece|
+                    if piece !=nil && piece.team!=@team
+                        piece.valid_moves.each do |move|
+                            #p "#{move} , our pos : #{[nRow,nCol]}"
+                            if move==[nRow,nCol]
+                                valid=false
+                            end
+                        end
+                    elsif piece !=nil && piece.team==@team
+                        valid=false
+                    end
+                end
+            end
+            if valid==true
+                @valid_moves<<[nRow,nCol]
+            end
         end
+        # left
+            nRow=row
+            nCol=col-1
+            valid=true
+            board_state.each do |row|
+                row.each do |piece|
+                    if piece !=nil && piece.team!=@team
+                        piece.valid_moves.each do |move|
+                            #p "#{move} , our pos : #{[nRow,nCol]}"
+                            if move==[nRow,nCol]
+                                valid=false
+                            end
+                        end
+                    elsif piece !=nil && piece.team==@team
+                        valid=false
+                    end
+                end
+            end
+            if valid==true
+                @valid_moves<<[nRow,nCol]
+            end
+
+        #right
+        nRow=row
+            nCol=col+1
+            valid=true
+            board_state.each do |row|
+                row.each do |piece|
+                    if piece !=nil && piece.team!=@team
+                        piece.valid_moves.each do |move|
+                            #p "#{move} , our pos : #{[nRow,nCol]}"
+                            if move==[nRow,nCol]
+                                valid=false
+                            end
+                        end
+                    elsif piece !=nil && piece.team==@team
+                        valid=false
+                    end
+                end
+            end
+            if valid==true
+                @valid_moves<<[nRow,nCol]
+            end
+    end
+
+    def get_piece(pos,board_state)
+        return board_state[pos[0]][pos[1]]
     end
 end

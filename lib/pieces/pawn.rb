@@ -16,6 +16,7 @@ class Pawn < Piece
 
     def update_valid_moves(board_state)
         @valid_moves=[]
+        @invalid_moves=[]
         row=@current_pos[0]
         col=@current_pos[1]
         if @team=="W"
@@ -25,10 +26,16 @@ class Pawn < Piece
             if get_piece([row-1,col],board_state)==nil
                 @valid_moves<<[row-1,col]
                 if @first_move
-                @valid_moves<<[row-2,col]
-                @first_move=false
+                    @valid_moves<<[row-2,col]
+                    @first_move=false
                 end
             end
+            # if not empty and not enemy
+            if get_piece([row-1,col],board_state)!=nil && get_piece([row-1,col],board_state).team==@team
+                @valid_moves<<[row-1,col]
+                @invalid_moves<<[row-1,col]
+            end
+
 
             if get_piece([row-1,col-1],board_state)!=nil
                 if get_piece([row-1,col-1],board_state).team!=@team
@@ -49,11 +56,16 @@ class Pawn < Piece
             if get_piece([row+1,col],board_state)==nil
                 @valid_moves<<[row+1,col]
                 if @first_move
-                @valid_moves<<[row+2,col]
-                @first_move=false
+                    @valid_moves<<[row+2,col]
+                    @first_move=false
                 end
             end
-
+            # if not empty and not enemy
+            if get_piece([row-1,col],board_state)!=nil && get_piece([row-1,col],board_state).team==@team
+                @valid_moves<<[row-1,col]
+                @invalid_moves<<[row-1,col]
+            end
+            
             if get_piece([row+1,col-1],board_state)!=nil
                 if get_piece([row+1,col-1],board_state).team!=@team
                     @valid_moves<<[row+1,col-1]
