@@ -61,7 +61,7 @@ class Pawn < Piece
                 end
             end
             # if not empty and not enemy
-            if get_piece([row-1,col],board_state)!=nil && get_piece([row-1,col],board_state).team==@team
+            if get_piece([row+1,col],board_state)!=nil && get_piece([row+1,col],board_state).team==@team
                 @valid_moves<<[row-1,col]
                 @invalid_moves<<[row-1,col]
             end

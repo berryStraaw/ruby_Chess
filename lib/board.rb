@@ -38,7 +38,7 @@ class Board
         @display_board.each{|row| p row}
     end
     def display_pieces()
-        @board.each{|row| p row}
+        @board.each{|row| p row; p ""}
     end
 
     def populate()
