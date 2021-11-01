@@ -12,10 +12,12 @@ class Board
     attr_accessor :nextPlayer
     attr_accessor :display_board
 
-    def intialize()
+    def initialize()
         @activePlayer=Player.new('player1',"W")
         @nextPlayer=Player.new('player2',"B")
-
+        create()
+        populate()
+        display()
     end
 
     def create()
@@ -83,6 +85,41 @@ class Board
             end
         end
     end
+
+    def winCheck()
+        return true
+    end
+
+    def select()
+
+    end
+
+    def select_move()
+
+    end
+
+    def move(unit,pos)
+
+    end
+
+    def switch_player()
+
+    end
+
+    def play()
+        loop do
+            piece=select()
+            new_pos=select_move()
+            move(piece,new_pos)
+            display()
+            if winCheck==true
+                break
+            end
+            switch_player()
+        end
+        puts "#{@activePlayer.name} wins"
+    end
+
 end
 
 #board=Board.new
