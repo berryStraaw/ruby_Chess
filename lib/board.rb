@@ -13,6 +13,7 @@ class Board
     attr_accessor :activePlayer
     attr_accessor :nextPlayer
     attr_accessor :display_board
+    attr_accessor :cKing
 
     def initialize()
         @activePlayer=Player.new('player1',"W")
@@ -47,9 +48,20 @@ class Board
 
     def populate()
 
-        update(Pawn.new([5,0],"W"))
-        update(Pawn.new([5,1],"B"))
+        #update(Pawn.new([5,0],"W"))
+        #update(Pawn.new([5,1],"B"))
+        #update(King.new([3,3],"W"))
+        #update(King.new([0,0],"B"))
+        #update(Pawn.new([0,3],"B"))
+        #update(Pawn.new([7,0],"W"))
 
+        #update(King.new([0,4],"B"))
+        #update(Pawn.new([0,3],"B"))
+        #update(Pawn.new([0,5],"B"))
+        #update(Pawn.new([1,5],"B"))
+        #update(Pawn.new([1,3],"B"))
+        #update(Rook.new([7,3],"W"))
+        #update(King.new([7,7],"W"))
         8.times do |col|
             update(Pawn.new([6,col],"W"))
         end
@@ -60,22 +72,20 @@ class Board
         update(Rook.new([7,7],"W"))
         update(Rook.new([0,0],"B"))
         update(Rook.new([0,7],"B"))
-
         update(Knight.new([7,1],"W"))
         update(Knight.new([7,6],"W"))
         update(Knight.new([0,1],"B"))
         update(Knight.new([0,6],"B"))
-
         update(Bishop.new([7,2],"W"))
         update(Bishop.new([7,5],"W"))
         update(Bishop.new([0,2],"B"))
-        update(Bishop.new([0,5],"B"))#
+        update(Bishop.new([0,5],"B"))
         update(King.new([7,4],"W"))
         update(Queen.new([7,3],"W"))
         update(King.new([0,4],"B"))
         update(Queen.new([0,3],"B"))
     end
-
+    
     def update(thing)
         @board[thing.current_pos[0]][thing.current_pos[1]]=thing
         @display_board[thing.current_pos[0]][thing.current_pos[1]]=thing.symbol
@@ -86,16 +96,59 @@ class Board
     end
 
     def update_pieces_moves()
+        wKing=0
+        bKing=0
         @board.each do |row|
             row.each do |col|
                 if col !=nil
-                    col.update_valid_moves(@board)
+                    if col.instance_of? King
+                        if col.team=="W"
+                            wKing=col
+                        else
+                            bKing=col
+                        end
+                    else
+                        col.update_valid_moves(@board)
+                    end
+                end
+            end
+        end
+        wKing.update_valid_moves(@board)
+        bKing.update_valid_moves(@board)
+    end
+
+    def check_for_check()
+        update_pieces_moves()
+        @cKing=0
+        @board.each do |row|
+            row.each do |col|
+                if col !=nil
+                    if col.instance_of? King
+                        if col.team==@nextPlayer.team
+                            @cKing=col
+                        end
+                    end
+                end
+            end
+        end
+
+        @nextPlayer.check=false
+        @board.each do |row|
+            row.each do |piece|
+                if piece !=nil && piece.team==@activePlayer.team
+                    piece.valid_moves.each do |move|
+                        if move==cKing.current_pos
+                            @nextPlayer.check=true
+                            p "#{@nextPlayer.team} king has to move"
+                        end
+                    end
                 end
             end
         end
     end
-
+    
     def winCheck()
+        update_pieces_moves()
         return false
     end
     def verify_input(pos)
@@ -124,6 +177,12 @@ class Board
             pos=ask_input()
             row= pos[0]
             col= pos[1]
+            if @activePlayer.check==true
+                if pos!=@cKing.current_pos
+                    puts "please select the king"
+                    next
+                end
+            end
             if @board[row][col]!= nil
                 if@board[row][col].team==@activePlayer.team
                     thing=@board[row][col]
@@ -133,8 +192,13 @@ class Board
                     else
                         puts "this unit has no valid moves"
                     end
+                else
+                    puts "wrong team"
                 end
+            else 
+                puts "choose a unit"
             end
+        
         end
     end
 
@@ -158,18 +222,36 @@ class Board
     end
 
     def switch_player()
-
+        temp=@nextPlayer
+        @nextPlayer=@activePlayer
+        @activePlayer=temp
     end
 
+    def check_no_moves_win()
+        if @activePlayer.check==true
+            @cKing.update_valid_moves(@board)
+            if @cKing.valid_moves==[]
+                p "checkmate"
+                return true
+            end
+        end
+    end
     def play()
+        check_for_check()
         loop do
+            if check_no_moves_win()==true
+                switch_player()
+                break
+            end
             piece=select()
             new_pos=select_move(piece)
             move(piece,new_pos)
             display()
+            check_for_check()
             if winCheck==true
                 break
             end
+
             switch_player()
         end
         puts "#{@activePlayer.name} wins"

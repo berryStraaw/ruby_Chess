@@ -25,22 +25,26 @@ class King < Piece
             nRow=row-1
             nCol=col-1+time
             valid=true
-            board_state.each do |row|
-                row.each do |piece|
-                    if piece !=nil && piece.team!=@team
-                        piece.valid_moves.each do |move|
-                            #p "#{move} , our pos : #{[nRow,nCol]}"
-                            if move==[nRow,nCol]
+            if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+                board_state.each do |row|
+                    row.each do |piece|
+                        if piece !=nil && piece.team!=@team
+                            piece.valid_moves.each do |move|
+                                #p "#{move} , our pos : #{[nRow,nCol]}"
+                                if move==[nRow,nCol]
+                                    valid=false
+                                end
+                            end
+                        elsif piece !=nil && piece.team==@team
+                            if piece.current_pos==[nRow,nCol]
                                 valid=false
                             end
                         end
-                    elsif piece !=nil && piece.team==@team
-                        valid=false
                     end
                 end
-            end
-            if valid==true
-                @valid_moves<<[nRow,nCol]
+                if valid==true
+                    @valid_moves<<[nRow,nCol]
+                end
             end
         end
         #2 bot row
@@ -48,66 +52,78 @@ class King < Piece
             nRow=row+1
             nCol=col-1+time
             valid=true
-            board_state.each do |row|
-                row.each do |piece|
-                    if piece !=nil && piece.team!=@team
-                        piece.valid_moves.each do |move|
-                            #p "#{move} , our pos : #{[nRow,nCol]}"
-                            if move==[nRow,nCol]
+            if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+                board_state.each do |row|
+                    row.each do |piece|
+                        if piece !=nil && piece.team!=@team
+                            piece.valid_moves.each do |move|
+                                #p "#{move} , our pos : #{[nRow,nCol]}"
+                                if move==[nRow,nCol]
+                                    valid=false
+                                end
+                            end
+                        elsif piece !=nil && piece.team==@team
+                            if piece.current_pos==[nRow,nCol]
                                 valid=false
                             end
                         end
-                    elsif piece !=nil && piece.team==@team
-                        valid=false
                     end
                 end
-            end
-            if valid==true
-                @valid_moves<<[nRow,nCol]
+                if valid==true
+                    @valid_moves<<[nRow,nCol]
+                end
             end
         end
         # left
             nRow=row
             nCol=col-1
             valid=true
-            board_state.each do |row|
-                row.each do |piece|
-                    if piece !=nil && piece.team!=@team
-                        piece.valid_moves.each do |move|
-                            #p "#{move} , our pos : #{[nRow,nCol]}"
-                            if move==[nRow,nCol]
+            if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+                board_state.each do |row|
+                    row.each do |piece|
+                        if piece !=nil && piece.team!=@team
+                            piece.valid_moves.each do |move|
+                                #p "#{move} , our pos : #{[nRow,nCol]}"
+                                if move==[nRow,nCol]
+                                    valid=false
+                                end
+                            end
+                        elsif piece !=nil && piece.team==@team
+                            if piece.current_pos==[nRow,nCol]
                                 valid=false
                             end
                         end
-                    elsif piece !=nil && piece.team==@team
-                        valid=false
                     end
                 end
-            end
-            if valid==true
-                @valid_moves<<[nRow,nCol]
+                if valid==true
+                    @valid_moves<<[nRow,nCol]
+                end
             end
 
         #right
         nRow=row
             nCol=col+1
             valid=true
-            board_state.each do |row|
-                row.each do |piece|
-                    if piece !=nil && piece.team!=@team
-                        piece.valid_moves.each do |move|
-                            #p "#{move} , our pos : #{[nRow,nCol]}"
-                            if move==[nRow,nCol]
+            if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+                board_state.each do |row|
+                    row.each do |piece|
+                        if piece !=nil && piece.team!=@team
+                            piece.valid_moves.each do |move|
+                                #p "#{move} , our pos : #{[nRow,nCol]}"
+                                if move==[nRow,nCol]
+                                    valid=false
+                                end
+                            end
+                        elsif piece !=nil && piece.team==@team
+                            if piece.current_pos==[nRow,nCol]
                                 valid=false
                             end
                         end
-                    elsif piece !=nil && piece.team==@team
-                        valid=false
                     end
                 end
-            end
-            if valid==true
-                @valid_moves<<[nRow,nCol]
+                if valid==true
+                    @valid_moves<<[nRow,nCol]
+                end
             end
     end
 
