@@ -7,7 +7,8 @@ game.populate()
 game.display()
 #game.display_pieces()
 game.update_pieces_moves()
-game.display_pieces()
+
+#game.display_pieces()
 
 #5.times do |time|
 #    break if time==3

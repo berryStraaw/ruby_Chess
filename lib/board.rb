@@ -42,66 +42,31 @@ class Board
     end
 
     def populate()
-        #w_pawn1=Pawn.new([6,0],"W")
-        #update(w_pawn1)
 
-        #update(Rook.new([7,0],"W"))
-        #update(Rook.new([2,0],"B"))
-        #update(Rook.new([6,0],"W"))
-        #update(Rook.new([3,3],"W"))
-        #update(Rook.new([4,4],"W"))
-        #update(Rook.new([3,1],"B"))
-        #update(Rook.new([2,4],"B"))
-        #update(Bishop.new([7,2],"W"))
-        #update(Bishop.new([7,7],"W"))
-        #update(Bishop.new([3,3],"W"))
-        #update(Bishop.new([1,1],"B"))
-        #update(Bishop.new([4,4],"B"))
-        #update(Bishop.new([6,0],"B"))
-        #update(Bishop.new([1,5],"B"))
-        #update(Bishop.new([2,2],"W"))
-        #update(Knight.new([3,3],"W"))
-        #update(Knight.new([1,2],"W"))
-        #update(Knight.new([1,4],"B"))
-        #update(Knight.new([2,5],"W"))
-        #update(Knight.new([4,1],"B"))
-        #update(King.new([3,3],"W"))
-        #update(Rook.new([2,2],"B"))
-        #update(Rook.new([0,2],"B"))
-        #update(Bishop.new([1,6],"B"))
-        #update(Bishop.new([4,4],"W"))
-        #update(Knight.new([0,4],"B"))
-        update(Queen.new([3,3],"W"))
-        update(Bishop.new([4,4],"W"))
-        update(Bishop.new([2,2],"W"))
+        8.times do |col|
+            update(Pawn.new([6,col],"W"))
+        end
+        8.times do |col|
+            update(Pawn.new([1,col],"B"))
+        end
+        update(Rook.new([7,0],"W"))
+        update(Rook.new([7,7],"W"))
+        update(Rook.new([0,0],"B"))
+        update(Rook.new([0,7],"B"))
 
+        update(Knight.new([7,1],"W"))
+        update(Knight.new([7,6],"W"))
+        update(Knight.new([0,1],"B"))
+        update(Knight.new([0,6],"B"))
 
-
-        #8.times do |col|
-        #    update(Pawn.new([6,col],"W"))
-        #end
-        #8.times do |col|
-        #    update(Pawn.new([1,col],"B"))
-        #end
-        #update(Rook.new([7,0],"W"))
-        #update(Rook.new([7,7],"W"))
-        #update(Rook.new([0,0],"B"))
-        #update(Rook.new([0,7],"B"))
-
-        #update(Knight.new([7,1],"W"))
-        #update(Knight.new([7,6],"W"))
-        #update(Knight.new([0,1],"B"))
-        #update(Knight.new([0,6],"B"))
-
-        #update(Bishop.new([7,2],"W"))
-        #update(Bishop.new([7,5],"W"))
-        #update(Bishop.new([0,2],"B"))
-        #update(Bishop.new([0,5],"B"))
-
-        #update(King.new([7,4],"W"))
-        #update(Queen.new([7,3],"W"))
-        #update(King.new([0,4],"B"))
-        #update(Queen.new([0,3],"B"))
+        update(Bishop.new([7,2],"W"))
+        update(Bishop.new([7,5],"W"))
+        update(Bishop.new([0,2],"B"))
+        update(Bishop.new([0,5],"B"))#
+        update(King.new([7,4],"W"))
+        update(Queen.new([7,3],"W"))
+        update(King.new([0,4],"B"))
+        update(Queen.new([0,3],"B"))
     end
 
     def update(thing)

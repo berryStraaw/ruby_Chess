@@ -16,6 +16,7 @@ class Knight < Piece
 
     def update_valid_moves(board_state)
         @valid_moves=[]
+        @invalid_moves=[]
         row=@current_pos[0]
         col=@current_pos[1]
 
@@ -27,7 +28,7 @@ class Knight < Piece
                 @valid_moves<<[nRow,nCol]
             else
                 @valid_moves<<[nRow,nCol]
-                if get_piece([nRow,nCol],board_state).team==@team
+                if get_piece([nRow,nCol],board_state).team == @team
                     @invalid_moves<<[nRow,nCol]
                 end
             end
@@ -53,7 +54,7 @@ class Knight < Piece
                 @valid_moves<<[nRow,nCol]
             else
                 @valid_moves<<[nRow,nCol]
-                if get_piece([nRow,nCol],board_state).team==@team
+                if get_piece([nRow,nCol],board_state).team == @team
                     @invalid_moves<<[nRow,nCol]
                 end
             end
@@ -124,7 +125,6 @@ class Knight < Piece
             end
         end
     end
-
     def get_piece(pos,board_state)
         return board_state[pos[0]][pos[1]]
     end
