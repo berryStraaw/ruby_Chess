@@ -7,30 +7,101 @@ class Knight < Piece
         @current_pos=pos
         @team=team
         if @team=="W"
-            @other_team="B"
             @symbol="\u265E" #U+265F
         else
-            @other_team="W"
             @symbol="\u2658"
         end
         @valid_moves=[]
     end
 
     def update_valid_moves(board_state)
-        if @first_move
-            @valid_moves<<[@current_pos[0],@current_pos[1]+2]
-            @first_move=false
-        end
-        @valid_moves<<[@current_pos[0],@current_pos[1]+2]
-        
-        if board_state[@current_pos[0]+2,@current_pos[1]+1]!="_"
-            piece=board_state[@current_pos[0]+2,@current_pos[1]+1]
-            if piece.team==@other_team
-                @valid_moves<<[@current_pos[0]+2,@current_pos[1]+1]
+        @valid_moves=[]
+        row=@current_pos[0]
+        col=@current_pos[1]
+
+        #1
+        nRow=row-2
+        nCol=col-1
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
             end
         end
-        if board_state[@current_pos[0]+2,@current_pos[1]+1]!="_" && board_state[@current_pos[0]+2,@current_pos[1]-1].team == @other_team
-            @valid_moves<<[@current_pos[0]+2,@current_pos[1]-1]
+        #2
+        nRow=row-2
+        nCol=col+1
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
         end
+        #3
+        nRow=row-1
+        nCol=col+2
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
+        end
+        #4
+        nRow=row+1
+        nCol=col+2
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
+        end
+        #5
+        nRow=row+2
+        nCol=col+1
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
+        end
+        #6
+        nRow=row+2
+        nCol=col-1
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
+        end
+        #7
+        nRow=row+1
+        nCol=col-2
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
+        end
+        #8
+        nRow=row-1
+        nCol=col-2
+        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
+            if get_piece([nRow,nCol],board_state)==nil
+                @valid_moves<<[nRow,nCol]
+            elsif get_piece([nRow,nCol],board_state).team!=@team
+                @valid_moves<<[nRow,nCol]
+            end
+        end
+    end
+
+    def get_piece(pos,board_state)
+        return board_state[pos[0]][pos[1]]
     end
 end

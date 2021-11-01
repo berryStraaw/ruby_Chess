@@ -60,6 +60,11 @@ class Board
         #update(Bishop.new([6,0],"B"))
         #update(Bishop.new([1,5],"B"))
         #update(Bishop.new([2,2],"W"))
+        #update(Knight.new([3,3],"W"))
+        #update(Knight.new([1,2],"W"))
+        #update(Knight.new([1,4],"B"))
+        #update(Knight.new([2,5],"W"))
+        #update(Knight.new([4,1],"B"))
 
 
 
