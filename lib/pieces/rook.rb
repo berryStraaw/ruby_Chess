@@ -7,10 +7,8 @@ class Rook < Piece
         @current_pos=pos
         @team=team
         if @team=="W"
-            @other_team="B"
             @symbol="\u265C" #U+265F
         else
-            @other_team="W"
             @symbol="\u2656"
         end
         @valid_moves=[]
@@ -26,7 +24,7 @@ class Rook < Piece
                 cRow=row-reverse_row-1
                 if get_piece([cRow,col],board_state)==nil
                     @valid_moves<<[cRow,col]
-                elsif get_piece([cRow,col],board_state).team==@other_team
+                elsif get_piece([cRow,col],board_state).team!=@team
                     @valid_moves<<[cRow,col]
                     break
                 else
@@ -38,7 +36,7 @@ class Rook < Piece
                 cRow=row+down_row+1
                 if get_piece([cRow,col],board_state)==nil
                     @valid_moves<<[cRow,col]
-                elsif get_piece([cRow,col],board_state).team==@other_team
+                elsif get_piece([cRow,col],board_state).team!=@team
                     @valid_moves<<[cRow,col]
                     break
                 else
@@ -50,7 +48,7 @@ class Rook < Piece
                 cCol=col-left_row-1
                 if get_piece([row,cCol],board_state)==nil
                     @valid_moves<<[row,cCol]
-                elsif get_piece([row,cCol],board_state).team==@other_team
+                elsif get_piece([row,cCol],board_state).team!=@team
                     @valid_moves<<[row,cCol]
                     break
                 else
@@ -62,7 +60,7 @@ class Rook < Piece
                 cCol=col+right_row+1
                 if get_piece([row,cCol],board_state)==nil
                     @valid_moves<<[row,cCol]
-                elsif get_piece([row,cCol],board_state).team==@other_team
+                elsif get_piece([row,cCol],board_state).team!=@team
                     @valid_moves<<[row,cCol]
                     break
                 else

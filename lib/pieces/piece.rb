@@ -4,6 +4,5 @@ class Piece
     attr_accessor :move_set
     attr_accessor :current_pos
     attr_accessor :name
-    attr_accessor :other_team
     attr_accessor :symbol
 end

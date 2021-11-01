@@ -42,8 +42,8 @@ class Board
     end
 
     def populate()
-        #w_pawn1=Pawn.new([6,0],"W")
-        #update(w_pawn1)
+        w_pawn1=Pawn.new([6,0],"W")
+        update(w_pawn1)
 
         #update(Rook.new([7,0],"W"))
         #update(Rook.new([2,0],"B"))

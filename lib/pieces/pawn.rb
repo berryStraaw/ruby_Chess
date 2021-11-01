@@ -7,10 +7,8 @@ class Pawn < Piece
         @current_pos=pos
         @team=team
         if @team=="W"
-            @other_team="B"
             @symbol="\u265F" #U+265F
         else
-            @other_team="W"
             @symbol="\u2659"
         end
         @valid_moves=[]
@@ -33,12 +31,12 @@ class Pawn < Piece
             end
 
             if get_piece([row-1,col-1],board_state)!=nil
-                if get_piece([row-1,col-1],board_state).team=@other_team
+                if get_piece([row-1,col-1],board_state).team!=@team
                     @valid_moves<<[row-1,col-1]
                 end
             end
             if  get_piece([row-1,col+1],board_state)!=nil
-                if get_piece([row-1,col+1],board_state).team=@other_team
+                if get_piece([row-1,col+1],board_state).team!=@team
                     @valid_moves<<[row-1,col+1]
                 end
             end
@@ -57,12 +55,12 @@ class Pawn < Piece
             end
 
             if get_piece([row+1,col-1],board_state)!=nil
-                if get_piece([row+1,col-1],board_state).team=@other_team
+                if get_piece([row+1,col-1],board_state).team!=@team
                     @valid_moves<<[row+1,col-1]
                 end
             end
             if  get_piece([row+1,col+1],board_state)!=nil
-                if get_piece([row+1,col+1],board_state).team=@other_team
+                if get_piece([row+1,col+1],board_state).team!=@team
                     @valid_moves<<[row+1,col+1]
                 end
             end
