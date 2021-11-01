@@ -16,17 +16,127 @@ class Queen < Piece
 
     def update_valid_moves(board_state)
         @valid_moves=[]
+        @invalid_moves=[]
         row=@current_pos[0]
         col=@current_pos[1]
 
-        #1
-        nRow=row-2
-        nCol=col-1
-        if nRow>=0 && nCol>=0 && nRow<8 && nCol<8
-            if get_piece([nRow,nCol],board_state)==nil
-                @valid_moves<<[nRow,nCol]
-            elsif get_piece([nRow,nCol],board_state).team!=@team
-                @valid_moves<<[nRow,nCol]
+        #Rook moveset
+        row.times do |reverse_row|
+            cRow=row-reverse_row-1
+            if get_piece([cRow,col],board_state)==nil
+                @valid_moves<<[cRow,col]
+            else
+                @valid_moves<<[cRow,col]
+                if get_piece([cRow,col],board_state).team==@team
+                    @invalid_moves<<[cRow,col]
+                end
+                break
+            end
+        end
+        #bot row
+        (7-row).times do |down_row|
+            cRow=row+down_row+1
+            if get_piece([cRow,col],board_state)==nil
+                @valid_moves<<[cRow,col]
+            else
+                @valid_moves<<[cRow,col]
+                if get_piece([cRow,col],board_state).team==@team
+                    @invalid_moves<<[cRow,col]
+                end
+                break
+            end
+        end
+        #left row
+        col.times do |left_row|
+            cCol=col-left_row-1
+            if get_piece([row,cCol],board_state)==nil
+                @valid_moves<<[row,cCol]
+            else
+                @valid_moves<<[row,cCol]
+                if get_piece([row,cCol],board_state).team==@team
+                    @invalid_moves<<[row,cCol]
+                end
+                break
+            end
+        end
+        #right row
+        (7-col).times do |right_row|
+            cCol=col+right_row+1
+            if get_piece([row,cCol],board_state)==nil
+                @valid_moves<<[row,cCol]
+            else
+                @valid_moves<<[row,cCol]
+                if get_piece([row,cCol],board_state).team==@team
+                    @invalid_moves<<[row,cCol]
+                end
+                break
+            end
+        end
+
+        # bishop moveset
+        8.times do |top|
+            tlRow=row-top-1
+            tlCol=col-top-1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
+                    break
+                end
+            end
+        end
+        #top right
+        8.times do |top|
+            tlRow=row-top-1
+            tlCol=col+top+1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
+                    break
+                end
+            end
+        end
+
+        #bot right
+        8.times do |top|
+            tlRow=row+top+1
+            tlCol=col+top+1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
+                    break
+                end
+            end
+        end
+
+        #bot left
+        8.times do |top|
+            tlRow=row+top+1
+            tlCol=col-top-1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                else
+                    @valid_moves<<[tlRow,tlCol]
+                    if get_piece([tlRow,tlCol],board_state).team==@team
+                        @invalid_moves<<[tlRow,tlCol]
+                    end
+                    break
+                end
             end
         end
     end
