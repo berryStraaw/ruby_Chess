@@ -5,6 +5,8 @@ require_relative 'pieces/knight'
 require_relative 'pieces/bishop'
 require_relative 'pieces/king'
 require_relative 'pieces/queen'
+require 'json'
+
 
 class Board
     attr_accessor :board
@@ -89,9 +91,37 @@ class Board
     def winCheck()
         return true
     end
+    def verify_input(pos)
+        if pos[0]>=0 && pos[1]>=0 && pos[0]<8 && pos[1]<8
+            return true
+        end
+        return false
+    end
 
+    def ask_input()
+        loop do
+            puts "Please choose a piece from #{@activePlayer.team} Team"
+            pos=gets.chomp
+            begin
+                pos=JSON.parse(pos)
+            rescue
+                puts "bad input"
+                next
+            end
+            return pos if verify_input(pos)
+        end
+    end
     def select()
-
+        loop do
+            pos=ask_input()
+            row= pos[0]
+            col= pos[1]
+            if @board[row][col]!= nil
+                if@board[row][col].team==@activePlayer.team
+                    return @board[row][col]
+                end
+            end
+        end
     end
 
     def select_move()
@@ -109,6 +139,7 @@ class Board
     def play()
         loop do
             piece=select()
+            p piece
             new_pos=select_move()
             move(piece,new_pos)
             display()
