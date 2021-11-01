@@ -7,30 +7,83 @@ class Bishop < Piece
         @current_pos=pos
         @team=team
         if @team=="W"
-            @other_team="B"
             @symbol="\u265D" #U+265F
         else
-            @other_team="W"
             @symbol="\u2657"
         end
         @valid_moves=[]
     end
 
     def update_valid_moves(board_state)
-        if @first_move
-            @valid_moves<<[@current_pos[0],@current_pos[1]+2]
-            @first_move=false
-        end
-        @valid_moves<<[@current_pos[0],@current_pos[1]+2]
-        
-        if board_state[@current_pos[0]+2,@current_pos[1]+1]!="_"
-            piece=board_state[@current_pos[0]+2,@current_pos[1]+1]
-            if piece.team==@other_team
-                @valid_moves<<[@current_pos[0]+2,@current_pos[1]+1]
+        @valid_moves=[]
+        row=@current_pos[0]
+        col=@current_pos[1]
+
+        #top left
+        8.times do |top|
+            tlRow=row-top-1
+            tlCol=col-top-1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                elsif get_piece([tlRow,tlCol],board_state).team!=@team
+                    @valid_moves<<[tlRow,tlCol]
+                    break
+                else
+                    break
+                end
             end
         end
-        if board_state[@current_pos[0]+2,@current_pos[1]+1]!="_" && board_state[@current_pos[0]+2,@current_pos[1]-1].team == @other_team
-            @valid_moves<<[@current_pos[0]+2,@current_pos[1]-1]
+        #top right
+        8.times do |top|
+            tlRow=row-top-1
+            tlCol=col+top+1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                elsif get_piece([tlRow,tlCol],board_state).team!=@team
+                    @valid_moves<<[tlRow,tlCol]
+                    break
+                else
+                    break
+                end
+            end
         end
+
+        #bot right
+        8.times do |top|
+            tlRow=row+top+1
+            tlCol=col+top+1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                elsif get_piece([tlRow,tlCol],board_state).team!=@team
+                    @valid_moves<<[tlRow,tlCol]
+                    break
+                else
+                    break
+                end
+            end
+        end
+
+        #bot left
+        8.times do |top|
+            tlRow=row+top+1
+            tlCol=col-top-1
+            if tlRow>=0 && tlCol>=0 && tlRow<8 && tlCol<8
+                if get_piece([tlRow,tlCol],board_state)==nil
+                    @valid_moves<<[tlRow,tlCol]
+                elsif get_piece([tlRow,tlCol],board_state).team!=@team
+                    @valid_moves<<[tlRow,tlCol]
+                    break
+                else
+                    break
+                end
+            end
+        end
+    end
+
+    def get_piece(pos,board_state)
+        return board_state[pos[0]][pos[1]]
     end
 end

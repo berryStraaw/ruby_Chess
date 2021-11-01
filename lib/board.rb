@@ -42,16 +42,24 @@ class Board
     end
 
     def populate()
-        w_pawn1=Pawn.new([6,0],"W")
-        update(w_pawn1)
+        #w_pawn1=Pawn.new([6,0],"W")
+        #update(w_pawn1)
 
         #update(Rook.new([7,0],"W"))
         #update(Rook.new([2,0],"B"))
         #update(Rook.new([6,0],"W"))
-        update(Rook.new([3,3],"W"))
-        update(Rook.new([4,4],"W"))
-        update(Rook.new([3,1],"B"))
-        update(Rook.new([2,4],"B"))
+        #update(Rook.new([3,3],"W"))
+        #update(Rook.new([4,4],"W"))
+        #update(Rook.new([3,1],"B"))
+        #update(Rook.new([2,4],"B"))
+        #update(Bishop.new([7,2],"W"))
+        #update(Bishop.new([7,7],"W"))
+        #update(Bishop.new([3,3],"W"))
+        #update(Bishop.new([1,1],"B"))
+        #update(Bishop.new([4,4],"B"))
+        #update(Bishop.new([6,0],"B"))
+        #update(Bishop.new([1,5],"B"))
+        #update(Bishop.new([2,2],"W"))
 
 
 
