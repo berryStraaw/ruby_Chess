@@ -6,6 +6,7 @@ require_relative 'pieces/bishop'
 require_relative 'pieces/king'
 require_relative 'pieces/queen'
 require 'json'
+require 'yaml'
 
 
 class Board
@@ -143,17 +144,31 @@ class Board
         p "invalid input"
         return false
     end
+    
+    def self.load()
+        YAML.load(File.read("the_odin_project/ruby_Chess/save.yml"))
+    end
+
+    def save()
+        File.open("the_odin_project/ruby_Chess/save.yml", "w") { |file| file.write(self.to_yaml) }
+        puts "progress has been saved"
+    end
 
     def ask_input()
         loop do
             pos=gets.chomp
-            begin
-                pos=JSON.parse(pos)
-            rescue
-                puts "bad input"
-                next
+            if pos=="s"
+                save()
+
+            else
+                begin
+                    pos=JSON.parse(pos)
+                rescue
+                    puts "bad input"
+                    next
+                end
+                return pos if verify_input(pos)
             end
-            return pos if verify_input(pos)
         end
     end
     def select()
@@ -242,6 +257,7 @@ class Board
 
     end
     def play()
+        puts "s to save"
         check_for_check()
         loop do
             if check_no_moves_win()==true

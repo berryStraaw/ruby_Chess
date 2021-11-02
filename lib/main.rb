@@ -1,7 +1,11 @@
 require_relative 'board'
 
-game=Board.new
+puts "would you like to load a game file? y/n"
+if gets.chomp=="y"
+    game=Board.load()
+    game.display()
+else
+   game=Board.new 
+end
 
-#p ar-ar2
 game.play()
-#game.display_pieces()[][]
