@@ -55,35 +55,37 @@ class Board
         #update(Pawn.new([0,3],"B"))
         #update(Pawn.new([7,0],"W"))
 
-        #update(King.new([0,4],"B"))
+        update(King.new([7,7],"B"))
         #update(Pawn.new([0,3],"B"))
         #update(Pawn.new([0,5],"B"))
         #update(Pawn.new([1,5],"B"))
-        #update(Pawn.new([1,3],"B"))
+        update(Pawn.new([1,3],"B"))
+        update(Pawn.new([2,4],"B"))
+        update(Pawn.new([2,5],"B"))
         #update(Rook.new([7,3],"W"))
-        #update(King.new([7,7],"W"))
-        8.times do |col|
-            update(Pawn.new([6,col],"W"))
-        end
-        8.times do |col|
-            update(Pawn.new([1,col],"B"))
-        end
-        update(Rook.new([7,0],"W"))
-        update(Rook.new([7,7],"W"))
-        update(Rook.new([0,0],"B"))
-        update(Rook.new([0,7],"B"))
-        update(Knight.new([7,1],"W"))
-        update(Knight.new([7,6],"W"))
-        update(Knight.new([0,1],"B"))
-        update(Knight.new([0,6],"B"))
-        update(Bishop.new([7,2],"W"))
-        update(Bishop.new([7,5],"W"))
-        update(Bishop.new([0,2],"B"))
-        update(Bishop.new([0,5],"B"))
-        update(King.new([7,4],"W"))
-        update(Queen.new([7,3],"W"))
-        update(King.new([0,4],"B"))
-        update(Queen.new([0,3],"B"))
+        update(King.new([3,3],"W"))
+        #8.times do |col|
+        #    update(Pawn.new([6,col],"W"))
+        #end
+        #8.times do |col|
+        #    update(Pawn.new([1,col],"B"))
+        #end
+        #update(Rook.new([7,0],"W"))
+        #update(Rook.new([7,7],"W"))
+        #update(Rook.new([0,0],"B"))
+        #update(Rook.new([0,7],"B"))
+        #update(Knight.new([7,1],"W"))
+        #update(Knight.new([7,6],"W"))
+        #update(Knight.new([0,1],"B"))
+        #update(Knight.new([0,6],"B"))
+        #update(Bishop.new([7,2],"W"))
+        #update(Bishop.new([7,5],"W"))
+        #update(Bishop.new([0,2],"B"))
+        #update(Bishop.new([0,5],"B"))
+        #update(King.new([7,4],"W"))
+        #update(Queen.new([7,3],"W"))
+        #update(King.new([0,4],"B"))
+        #update(Queen.new([0,3],"B"))
     end
     
     def update(thing)
@@ -216,6 +218,9 @@ class Board
     end
 
     def move(unit,pos)
+        if unit.instance_of? Pawn
+            unit.has_moved=true
+        end
         delete(unit.current_pos)
         unit.update_pos(pos)
         update(unit)

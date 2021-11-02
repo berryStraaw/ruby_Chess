@@ -4,4 +4,4 @@ game=Board.new
 
 #p ar-ar2
 game.play()
-#game.display_pieces()[]
+#game.display_pieces()[][]

@@ -29,10 +29,19 @@ class King < Piece
                 board_state.each do |row|
                     row.each do |piece|
                         if piece !=nil && piece.team!=@team
-                            piece.valid_moves.each do |move|
-                                #p "#{move} , our pos : #{[nRow,nCol]}"
-                                if move==[nRow,nCol]
-                                    valid=false
+                            if piece.instance_of? Pawn
+                                piece.a_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
+                                end
+                            else
+                                piece.valid_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
                                 end
                             end
                         elsif piece !=nil && piece.team==@team
@@ -56,10 +65,19 @@ class King < Piece
                 board_state.each do |row|
                     row.each do |piece|
                         if piece !=nil && piece.team!=@team
-                            piece.valid_moves.each do |move|
-                                #p "#{move} , our pos : #{[nRow,nCol]}"
-                                if move==[nRow,nCol]
-                                    valid=false
+                            if piece.instance_of? Pawn
+                                piece.a_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
+                                end
+                            else
+                                piece.valid_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
                                 end
                             end
                         elsif piece !=nil && piece.team==@team
@@ -82,10 +100,19 @@ class King < Piece
                 board_state.each do |row|
                     row.each do |piece|
                         if piece !=nil && piece.team!=@team
-                            piece.valid_moves.each do |move|
-                                #p "#{move} , our pos : #{[nRow,nCol]}"
-                                if move==[nRow,nCol]
-                                    valid=false
+                            if piece.instance_of? Pawn
+                                piece.a_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
+                                end
+                            else
+                                piece.valid_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
                                 end
                             end
                         elsif piece !=nil && piece.team==@team
@@ -108,10 +135,19 @@ class King < Piece
                 board_state.each do |row|
                     row.each do |piece|
                         if piece !=nil && piece.team!=@team
-                            piece.valid_moves.each do |move|
-                                #p "#{move} , our pos : #{[nRow,nCol]}"
-                                if move==[nRow,nCol]
-                                    valid=false
+                            if piece.instance_of? Pawn
+                                piece.a_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
+                                end
+                            else
+                                piece.valid_moves.each do |move|
+                                    #p "#{move} , our pos : #{[nRow,nCol]}"
+                                    if move==[nRow,nCol]
+                                        valid=false
+                                    end
                                 end
                             end
                         elsif piece !=nil && piece.team==@team
