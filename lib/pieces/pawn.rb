@@ -32,7 +32,9 @@ class Pawn < Piece
             if get_piece([row-1,col],board_state)==nil
                 @valid_moves<<[row-1,col]
                 if @has_moved==false
-                    @valid_moves<<[row-2,col]
+                    if get_piece([row-2,col],board_state)==nil
+                        @valid_moves<<[row-2,col]
+                    end
                 end
             end
             # if not empty and not enemy
@@ -67,7 +69,9 @@ class Pawn < Piece
             if get_piece([row+1,col],board_state)==nil
                 @valid_moves<<[row+1,col]
                 if @has_moved==false
-                    @valid_moves<<[row+2,col]
+                    if get_piece([row+2,col],board_state)==nil
+                        @valid_moves<<[row+2,col]
+                    end
                 end
             end
             # if not empty and not enemy

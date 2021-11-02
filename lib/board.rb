@@ -47,45 +47,28 @@ class Board
     end
 
     def populate()
-
-        #update(Pawn.new([5,0],"W"))
-        #update(Pawn.new([5,1],"B"))
-        #update(King.new([3,3],"W"))
-        #update(King.new([0,0],"B"))
-        #update(Pawn.new([0,3],"B"))
-        #update(Pawn.new([7,0],"W"))
-
-        update(King.new([7,7],"B"))
-        #update(Pawn.new([0,3],"B"))
-        #update(Pawn.new([0,5],"B"))
-        #update(Pawn.new([1,5],"B"))
-        update(Pawn.new([1,3],"B"))
-        update(Pawn.new([2,4],"B"))
-        update(Pawn.new([2,5],"B"))
-        #update(Rook.new([7,3],"W"))
-        update(King.new([3,3],"W"))
-        #8.times do |col|
-        #    update(Pawn.new([6,col],"W"))
-        #end
-        #8.times do |col|
-        #    update(Pawn.new([1,col],"B"))
-        #end
-        #update(Rook.new([7,0],"W"))
-        #update(Rook.new([7,7],"W"))
-        #update(Rook.new([0,0],"B"))
-        #update(Rook.new([0,7],"B"))
-        #update(Knight.new([7,1],"W"))
-        #update(Knight.new([7,6],"W"))
-        #update(Knight.new([0,1],"B"))
-        #update(Knight.new([0,6],"B"))
-        #update(Bishop.new([7,2],"W"))
-        #update(Bishop.new([7,5],"W"))
-        #update(Bishop.new([0,2],"B"))
-        #update(Bishop.new([0,5],"B"))
-        #update(King.new([7,4],"W"))
-        #update(Queen.new([7,3],"W"))
-        #update(King.new([0,4],"B"))
-        #update(Queen.new([0,3],"B"))
+        8.times do |col|
+            update(Pawn.new([6,col],"W"))
+        end
+        8.times do |col|
+            update(Pawn.new([1,col],"B"))
+        end
+        update(Rook.new([7,0],"W"))
+        update(Rook.new([7,7],"W"))
+        update(Rook.new([0,0],"B"))
+        update(Rook.new([0,7],"B"))
+        update(Knight.new([7,1],"W"))
+        update(Knight.new([7,6],"W"))
+        update(Knight.new([0,1],"B"))
+        update(Knight.new([0,6],"B"))
+        update(Bishop.new([7,2],"W"))
+        update(Bishop.new([7,5],"W"))
+        update(Bishop.new([0,2],"B"))
+        update(Bishop.new([0,5],"B"))
+        update(King.new([7,4],"W"))
+        update(Queen.new([7,3],"W"))
+        update(King.new([0,4],"B"))
+        update(Queen.new([0,3],"B"))
     end
     
     def update(thing)
@@ -239,7 +222,24 @@ class Board
                 p "checkmate"
                 return true
             end
+        else
+            #finds valid moves
+            avMoves=[]
+            @board.each do |row|
+                row.each do |col|
+                    if col !=nil
+                        if col.team==@activePlayer.team
+                            avMoves<<col.valid_moves
+                        end
+                    end
+                end
+            end
+            if avMoves.flatten==[]
+                p "no valid moves left"
+                return true
+            end
         end
+
     end
     def play()
         check_for_check()
